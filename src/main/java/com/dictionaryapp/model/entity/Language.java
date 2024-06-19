@@ -14,7 +14,7 @@ public class Language {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private LanguageName name;
+    private LanguageName languageName;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
@@ -35,12 +35,12 @@ public class Language {
         return this;
     }
 
-    public LanguageName getName() {
-        return name;
+    public LanguageName getLanguageName() {
+        return languageName;
     }
 
-    public Language setName(LanguageName name) {
-        this.name = name;
+    public Language setLanguageName(LanguageName name) {
+        this.languageName = name;
         return this;
     }
 
