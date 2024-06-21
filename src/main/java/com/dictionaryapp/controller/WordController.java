@@ -23,7 +23,7 @@ public class WordController {
         return new AddWordDTO();
     }
 
-    @GetMapping("/word_add")
+    @GetMapping("/words")
     public String wordAdd(){
         if (this.userService.isCurrentUserLoggedIn()){
             return "word-add";
@@ -32,7 +32,7 @@ public class WordController {
         return "redirect:/home";
     }
 
-    @PostMapping("/word_add")
+    @PostMapping("/words")
     public String doWordAdd(@Valid AddWordDTO data,
                             BindingResult bindingResult,
                             RedirectAttributes rAtt){

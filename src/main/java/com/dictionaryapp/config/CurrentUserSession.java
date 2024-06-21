@@ -31,7 +31,7 @@ public class CurrentUserSession {
         this.username = username;
     }
 
-    public void clear(){
+    public void logout(){
         this.id = 0;
         this.username = null;
     }
@@ -40,7 +40,6 @@ public class CurrentUserSession {
         if (this.id == 0 || this.username == null){
             return false;
         }
-
         return true;
     }
 }

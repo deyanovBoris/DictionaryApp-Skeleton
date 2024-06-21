@@ -1,8 +1,7 @@
 package com.dictionaryapp.controller;
 
+import com.dictionaryapp.config.CurrentUserSession;
 import com.dictionaryapp.model.entity.LanguageName;
-import com.dictionaryapp.service.LanguageService;
-import com.dictionaryapp.service.UserService;
 import com.dictionaryapp.service.WordService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,18 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    private final UserService userService;
+    private final CurrentUserSession currentUserSession;
     private final WordService wordService;
 
 
-    public HomeController(UserService userService, WordService wordService) {
-        this.userService = userService;
+    public HomeController(CurrentUserSession currentUserSession, WordService wordService) {
+        this.currentUserSession = currentUserSession;
         this.wordService = wordService;
     }
 
     @GetMapping("/")
-    public String index(Model model){
-        if (this.userService.isCurrentUserLoggedIn()){
+    public String notLogged(Model model){
+        if (this.currentUserSession.isLoggedIn()){
             return "redirect:/home";
         }
 
@@ -30,8 +29,8 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(Model model){
-        if (!this.userService.isCurrentUserLoggedIn()){
+    public String logged(Model model){
+        if (!this.currentUserSession.isLoggedIn()){
             return "redirect:/";
         }
 

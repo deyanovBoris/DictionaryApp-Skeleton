@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean logoutUser() {
         if (currentUser.isLoggedIn()){
-            currentUser.clear();
+            currentUser.logout();
             return true;
         }
 

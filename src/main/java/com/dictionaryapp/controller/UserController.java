@@ -1,5 +1,6 @@
 package com.dictionaryapp.controller;
 
+import com.dictionaryapp.config.CurrentUserSession;
 import com.dictionaryapp.model.dtos.UserRegisterDTO;
 import com.dictionaryapp.service.UserService;
 import com.dictionaryapp.model.dtos.LoginUserDTO;
@@ -15,9 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final CurrentUserSession currentUserSession;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, CurrentUserSession currentUserSession) {
         this.userService = userService;
+        this.currentUserSession = currentUserSession;
     }
 
     //Registration//
@@ -27,7 +30,7 @@ public class UserController {
     }
     @GetMapping("/register")
     public String register(Model model){
-        if (this.userService.isCurrentUserLoggedIn()){
+        if (this.currentUserSession.isLoggedIn()){
             return "redirect:/";
         }
 
@@ -57,7 +60,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model){
-        if (this.userService.isCurrentUserLoggedIn()){
+        if (this.currentUserSession.isLoggedIn()){
             return "redirect:/";
         }
 
@@ -90,8 +93,8 @@ public class UserController {
 
     @PostMapping("/logout")
     public String doLogout(){
-        if (this.userService.isCurrentUserLoggedIn()){
-            this.userService.logoutUser();
+        if (this.currentUserSession.isLoggedIn()){
+            this.currentUserSession.logout();
         }
         return "redirect:/";
     }
