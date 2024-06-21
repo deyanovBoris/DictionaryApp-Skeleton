@@ -35,4 +35,12 @@ public class CurrentUserSession {
         this.id = 0;
         this.username = null;
     }
+
+    public boolean isLoggedIn(){
+        if (this.id == 0 || this.username == null){
+            return false;
+        }
+
+        return true;
+    }
 }

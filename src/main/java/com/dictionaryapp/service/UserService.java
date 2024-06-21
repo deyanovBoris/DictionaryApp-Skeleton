@@ -7,4 +7,10 @@ public interface UserService {
     boolean registerUser(UserRegisterDTO userRegisterDTO);
 
     boolean loginUser(LoginUserDTO data);
+
+    boolean logoutUser();
+
+    boolean isCurrentUserLoggedIn();
+
+    long getCurrentUserId();
 }

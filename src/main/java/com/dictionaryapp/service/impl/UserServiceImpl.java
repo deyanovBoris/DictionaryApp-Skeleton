@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private CurrentUserSession currentUser;
+    private final CurrentUserSession currentUser;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
@@ -65,5 +65,25 @@ public class UserServiceImpl implements UserService {
         this.currentUser.login(user);
 
         return true;
+    }
+
+    @Override
+    public boolean logoutUser() {
+        if (currentUser.isLoggedIn()){
+            currentUser.clear();
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isCurrentUserLoggedIn() {
+        return this.currentUser.isLoggedIn();
+    }
+
+    @Override
+    public long getCurrentUserId() {
+        return this.currentUser.getId();
     }
 }

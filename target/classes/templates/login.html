@@ -15,7 +15,7 @@
         <!--    Example: Render errors messages with fields.errors - you can make it differently. -->
         <!--    <div th:each="error: ${#fields.errors()}" th:text="${error}" class="text-danger">Error messages</div>-->
 
-        <div th:each="error: ${#fields.detailedErrors()}"
+        <div th:each="error: ${#fields.errors()}"
              th:text="${error}"
              class="text-danger">
                 Error messages

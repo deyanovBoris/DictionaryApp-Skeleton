@@ -13,21 +13,33 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-nav rounded ">
         <a class="nav-link my-text-color active h5 " th:href="@{/}">Dictionary App</a>
-        <a class="nav-link my-text-color active h5  " th:href="@{/word-add}">Add Word</a>
+        <a th:if="${@currentUserSession.isLoggedIn()}"
+           class="nav-link my-text-color active h5"
+           th:href="@{/word_add}">Add Word</a>
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
-                <li class="nav-item col-md-4">
-                    <a class="nav-link active h5 my-text-color" th:href="@{/login}">Login</a>
-                </li>
+                <th:block th:if="${@currentUserSession.isLoggedIn()}">
+                    <a class="nav-link h5 my-text-color">Welcome,
+                        <span th:text="${@currentUserSession.getUsername()}"></span></a>
+                    <li class="nav-item col-md-4">
+                        <form th:action="@{/logout}" th:method="post">
+                            <input class="btn btn-link my-text-color active h4"
+                                   type="submit" th:value="Logout"></input>
+                        </form>
+<!--                        <a class="nav-link my-text-color active h5 " href="/">Logout</a>-->
+                    </li>
+                </th:block>
 
-                <li class="nav-item col-md-4">
-                    <a class="nav-link my-text-color active h5 " th:href="@{/register}">Register</a>
-                </li>
-                    <a class="nav-link h5 my-text-color">Welcome, {username}</a>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link my-text-color active h5 " href="/">Logout</a>
-                </li>
+                <th:block th:unless="${@currentUserSession.isLoggedIn()}">
+                    <li class="nav-item col-md-4">
+                        <a class="nav-link active h5 my-text-color" th:href="@{/login}">Login</a>
+                    </li>
+
+                    <li class="nav-item col-md-4">
+                        <a class="nav-link my-text-color active h5 " th:href="@{/register}">Register</a>
+                    </li>
+                </th:block>
             </ul>
         </div>
     </nav>

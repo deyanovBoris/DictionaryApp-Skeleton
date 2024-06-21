@@ -2,7 +2,7 @@ package com.dictionaryapp.model.entity;
 
 import jakarta.persistence.*;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "words")
@@ -18,7 +18,7 @@ public class Word {
     @Basic
     private String example;
     @Column(nullable = false, name = "input_date")
-    private Instant inputDate;
+    private LocalDate inputDate;
     @ManyToOne(optional = false)
     private Language language;
     @ManyToOne(optional = false)
@@ -59,11 +59,11 @@ public class Word {
         this.example = example;
     }
 
-    public Instant getInputDate() {
+    public LocalDate getInputDate() {
         return inputDate;
     }
 
-    public void setInputDate(Instant inputDate) {
+    public void setInputDate(LocalDate inputDate) {
         this.inputDate = inputDate;
     }
 

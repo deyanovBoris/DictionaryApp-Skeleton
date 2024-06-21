@@ -27,6 +27,10 @@ public class UserController {
     }
     @GetMapping("/register")
     public String register(Model model){
+        if (this.userService.isCurrentUserLoggedIn()){
+            return "redirect:/";
+        }
+
         return "register";
     }
     @PostMapping("/register")
@@ -53,6 +57,10 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model){
+        if (this.userService.isCurrentUserLoggedIn()){
+            return "redirect:/";
+        }
+
         return "login";
     }
 
@@ -79,5 +87,15 @@ public class UserController {
 
         return "redirect:/home";
     }
+
+    @PostMapping("/logout")
+    public String doLogout(){
+        if (this.userService.isCurrentUserLoggedIn()){
+            this.userService.logoutUser();
+        }
+        return "redirect:/";
+    }
+
+
 
 }
