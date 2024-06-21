@@ -41,7 +41,7 @@ public class WordController {
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.wordData",
                     bindingResult);
 
-            return "redirect:/word_add";
+            return "redirect:/words";
         }
 
         boolean success = this.wordService.addWord(data);
@@ -50,7 +50,7 @@ public class WordController {
             rAtt.addFlashAttribute("wordData", data);
             rAtt.addFlashAttribute("nonExistingLanguage", true);
 
-            return "redirect:/word_add";
+            return "redirect:/words";
         }
 
         return "redirect:/";
